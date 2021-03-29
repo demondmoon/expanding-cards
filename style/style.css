@@ -1,0 +1,67 @@
+* {
+    box-sizing:border-box;
+}
+
+body {
+    font-family: 'Muli', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    overflow:hidden;
+}
+
+.container {
+    display: flex;
+    width: 90vw;
+}
+
+.panel {
+    background-size: auto 100%;
+    /* 注意，backgroud的默认大小是由内容决定的 */
+    background-position:center;
+    background-repeat: no-repeat;
+    height: 80vh;
+    border-radius: 50px;
+    cursor:pointer;
+    color:#fff;
+    flex:0.5;
+    /* flex是flex-grow, flex-shrink和flex-basis三者的缩写，如果只写一个没有单位的数字，那就是flex-grow。flex-grow的一个特点是可以将元素拉宽，占满整个main-axis，默认属性值为0，即不拉伸。当前我们设置的是0.5，而在active中，我们要设置一个很大的flex值 */
+    margin:10px;
+    position:relative;
+    /* 使用relative的原因是，我们想把内部的h3变为absolute */
+   transition: flex 0.7s ease-in;
+   /* 属性值为flex，意味着transition将作用于panel的flex属性,ease-in是逐渐加快的动画 */
+    
+}
+
+.panel h3 {
+    font-size: 2.4rem;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    margin: 0;
+    opacity: 0;
+}
+
+.panel.active {
+    flex:5;
+}
+/* 注意这里面我们.panel和.active之间没有空格，它的意思是，一个元素的class属性中要同时有这两个类名，样式才生效  */
+
+.panel.active h3{
+    opacity: 1;
+    /* 最后一个0.4s是delay，不设置这个delay的话，会看到一个文字下落的情况 */
+    transition: opacity 0.7s ease-in 0.4s;
+}
+
+@media (max-width:480px){
+    .container{
+        width:100vw;
+    }
+    .panel:nth-of-type(4),
+    .panel:nth-of-type(5) {
+        display:none;
+    }
+}
